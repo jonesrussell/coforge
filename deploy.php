@@ -29,10 +29,19 @@ host('coforge.xyz')
 after('deploy:failed', 'deploy:unlock');
 before('deploy:symlink', 'artisan:migrate');
 
+task('deploy:install_services', function (): void {
+    $serviceDir = '~/.config/systemd/user';
+    run("mkdir -p $serviceDir");
+    run("cp {{release_path}}/deploy/systemd-user/*.service $serviceDir/");
+    run('systemctl --user daemon-reload');
+    run('systemctl --user enable coforge-horizon.service coforge-inertia-ssr.service coforge-schedule-work.service');
+});
+before('deploy:symlink', 'deploy:install_services');
+
 task('deploy:restart_services', function (): void {
     run('cd {{release_path}} && {{bin/php}} artisan horizon:terminate', ['allow_failure' => true]);
     run('cd {{release_path}} && {{bin/php}} artisan inertia:stop-ssr', ['allow_failure' => true]);
-    run('systemctl --user restart coforge-schedule-work.service', ['allow_failure' => true]);
+    run('systemctl --user restart coforge-schedule-work.service coforge-horizon.service coforge-inertia-ssr.service', ['allow_failure' => true]);
 });
 after('deploy:symlink', 'deploy:restart_services');
 task('deploy:reload_php_fpm', function (): void {
