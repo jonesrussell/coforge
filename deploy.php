@@ -5,7 +5,7 @@ require 'recipe/laravel.php';
 
 // Config
 
-set('repository', 'git@github.com:jonesrussell/coforge.git');
+set('repository', 'git@github-coforge:jonesrussell/coforge.git');
 
 add('shared_files', []);
 add('shared_dirs', []);
@@ -13,7 +13,7 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('deployer@coforge.xyz')
+host('coforge.xyz')
     ->set('remote_user', 'deployer')
     ->set('deploy_path', '~/coforge');
 
