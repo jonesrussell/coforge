@@ -9,9 +9,16 @@ require 'recipe/laravel.php';
 set('repository', 'git@github-coforge:jonesrussell/coforge.git');
 set('keep_releases', 5);
 
-add('shared_files', []);
+add('shared_files', [
+    '.env',
+    'database/database.sqlite',
+]);
 add('shared_dirs', []);
-add('writable_dirs', []);
+add('writable_dirs', [
+    'storage',
+    'bootstrap/cache',
+    'database',
+]);
 
 task('deploy:build_assets', function (): void {
     run('bash -lc "source ~/.nvm/nvm.sh 2>/dev/null; cd {{release_path}} && npm ci && npm run build:ssr"');

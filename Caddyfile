@@ -1,0 +1,13 @@
+coforge.xyz {
+  root * /home/deployer/coforge/current/public
+  file_server
+  php_fastcgi * unix//run/php/php8.4-fpm.sock {
+    resolve_root_symlink
+  }
+
+  log {
+    output file /home/deployer/coforge/log/access.log {
+      mode 0644
+    }
+  }
+}
