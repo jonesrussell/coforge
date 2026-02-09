@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,5 +60,15 @@ class User extends Authenticatable
     public function pitch(): HasOne
     {
         return $this->hasOne(Pitch::class);
+    }
+
+    /**
+     * Interests the user has expressed in others' pitches.
+     *
+     * @return HasMany<PitchInterest, $this>
+     */
+    public function pitchInterests(): HasMany
+    {
+        return $this->hasMany(PitchInterest::class, 'user_id');
     }
 }

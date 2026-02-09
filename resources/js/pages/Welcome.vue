@@ -66,6 +66,9 @@ onMounted(() => {
                     >COFORGE</a
                 >
                 <div class="flex items-center gap-3">
+                    <Link href="/discover" class="nav-link-ghost">
+                        Discover
+                    </Link>
                     <Link
                         v-if="$page.props.auth.user"
                         :href="dashboard()"

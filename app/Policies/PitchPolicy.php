@@ -43,4 +43,16 @@ class PitchPolicy
     {
         return true;
     }
+
+    /**
+     * Determine whether the user can express interest in this pitch.
+     */
+    public function createInterest(User $user, Pitch $pitch): bool
+    {
+        if ($pitch->user_id === $user->id) {
+            return false;
+        }
+
+        return $pitch->status === 'published';
+    }
 }

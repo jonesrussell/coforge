@@ -74,6 +74,28 @@ class PitchController extends Controller
     }
 
     /**
+     * Show a published pitch (read-only). Bound by slug.
+     */
+    public function show(Request $request, Pitch $pitch): Response
+    {
+        $this->authorize('view', $pitch);
+
+        $pitch->load(['user:id,name', 'skills:id,name,slug']);
+
+        $hasExpressedInterest = false;
+        if ($request->user()) {
+            $hasExpressedInterest = $pitch->interests()
+                ->where('user_id', $request->user()->id)
+                ->exists();
+        }
+
+        return Inertia::render('pitches/Show', [
+            'pitch' => $pitch,
+            'hasExpressedInterest' => $hasExpressedInterest,
+        ]);
+    }
+
+    /**
      * Show the form for editing the pitch.
      */
     public function edit(Request $request, Pitch $pitch): Response

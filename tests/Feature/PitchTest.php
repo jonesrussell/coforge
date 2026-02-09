@@ -92,3 +92,65 @@ test('user cannot edit another user pitch', function () {
 
     $response->assertForbidden();
 });
+
+test('discover page shows published pitches', function () {
+    $user = User::factory()->create();
+    Pitch::create([
+        'user_id' => $user->id,
+        'title' => 'Published Idea',
+        'slug' => 'published-idea',
+        'tagline' => 'A tagline',
+        'body' => 'Body',
+        'pitch_type' => 'project',
+        'status' => 'published',
+    ]);
+
+    $response = $this->get(route('discover'));
+
+    $response->assertOk();
+    $response->assertInertia(fn ($page) => $page
+        ->component('discover/Index')
+        ->has('pitches')
+        ->has('pitches.data')
+        ->where('pitches.data.0.title', 'Published Idea')
+    );
+});
+
+test('pitch show page displays published pitch', function () {
+    $user = User::factory()->create();
+    $pitch = Pitch::create([
+        'user_id' => $user->id,
+        'title' => 'Public Pitch',
+        'slug' => 'public-pitch',
+        'tagline' => 'Tagline',
+        'body' => 'Full body',
+        'pitch_type' => 'project',
+        'status' => 'published',
+    ]);
+
+    $response = $this->get(route('pitches.show', $pitch));
+
+    $response->assertOk();
+    $response->assertInertia(fn ($page) => $page
+        ->component('pitches/Show')
+        ->where('pitch.title', 'Public Pitch')
+        ->where('pitch.slug', 'public-pitch')
+    );
+});
+
+test('draft pitch show returns 403 for guest', function () {
+    $user = User::factory()->create();
+    $pitch = Pitch::create([
+        'user_id' => $user->id,
+        'title' => 'Draft Pitch',
+        'slug' => 'draft-pitch',
+        'tagline' => 'Tagline',
+        'body' => 'Body',
+        'pitch_type' => 'project',
+        'status' => 'draft',
+    ]);
+
+    $response = $this->get(route('pitches.show', $pitch));
+
+    $response->assertForbidden();
+});

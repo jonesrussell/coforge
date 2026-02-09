@@ -86,11 +86,14 @@ const breadcrumbs: BreadcrumbItem[] = [
                         </Badge>
                     </div>
                 </CardContent>
-                <CardFooter>
+                <CardFooter class="flex gap-2">
                     <Button as-child variant="default">
                         <Link :href="PitchController.edit(pitch).url"
                             >Edit pitch</Link
                         >
+                    </Button>
+                    <Button as-child variant="outline">
+                        <Link href="/pitches/interests">Interests</Link>
                     </Button>
                 </CardFooter>
             </Card>

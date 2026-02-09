@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Pitch extends Model
@@ -82,5 +83,15 @@ class Pitch extends Model
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class, 'pitch_skill')->withTimestamps();
+    }
+
+    /**
+     * Interests expressed in this pitch.
+     *
+     * @return HasMany<PitchInterest, $this>
+     */
+    public function interests(): HasMany
+    {
+        return $this->hasMany(PitchInterest::class);
     }
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import { useNorthcloudNavigation } from '@jonesrussell/northcloud-laravel';
-import { BookOpen, Folder, LayoutGrid, Megaphone } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Megaphone, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
 import PitchController from '@/actions/App/Http/Controllers/PitchController';
 import NavFooter from '@/components/NavFooter.vue';
@@ -27,6 +27,11 @@ const mainNavItems = computed<NavItem[]>(() => [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Discover',
+        href: '/discover',
+        icon: Search,
     },
     {
         title: 'Pitches',

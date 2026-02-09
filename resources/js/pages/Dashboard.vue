@@ -49,11 +49,18 @@ const breadcrumbs: BreadcrumbItem[] = [
                         <CardTitle>Your pitch</CardTitle>
                         <CardDescription>{{ pitch.title }}</CardDescription>
                     </div>
-                    <Button as-child variant="default">
-                        <Link :href="PitchController.index.url()"
-                            >View pitch</Link
-                        >
-                    </Button>
+                    <div class="flex gap-2">
+                        <Button as-child variant="default">
+                            <Link :href="PitchController.index.url()"
+                                >View pitch</Link
+                            >
+                        </Button>
+                        <Button as-child variant="outline">
+                            <Link href="/pitches/interests"
+                                >Interests</Link
+                            >
+                        </Button>
+                    </div>
                 </CardHeader>
                 <CardContent>
                     <p class="text-sm text-muted-foreground">
