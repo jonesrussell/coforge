@@ -1,9 +1,30 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import PitchController from '@/actions/App/Http/Controllers/PitchController';
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
-import PlaceholderPattern from '../components/PlaceholderPattern.vue';
+
+type Pitch = {
+    id: number;
+    title: string;
+    tagline: string;
+    status: string;
+} | null;
+
+type Props = {
+    pitch: Pitch;
+};
+
+defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -20,28 +41,46 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
+            <Card v-if="pitch" class="max-w-2xl">
+                <CardHeader
+                    class="flex flex-row items-center justify-between space-y-0"
                 >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-            </div>
-            <div
-                class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
-            >
-                <PlaceholderPattern />
-            </div>
+                    <div>
+                        <CardTitle>Your pitch</CardTitle>
+                        <CardDescription>{{ pitch.title }}</CardDescription>
+                    </div>
+                    <Button as-child variant="default">
+                        <Link :href="PitchController.index.url()"
+                            >View pitch</Link
+                        >
+                    </Button>
+                </CardHeader>
+                <CardContent>
+                    <p class="text-sm text-muted-foreground">
+                        {{ pitch.tagline }}
+                    </p>
+                    <p class="mt-2 text-xs text-muted-foreground">
+                        Status: {{ pitch.status }}
+                    </p>
+                </CardContent>
+            </Card>
+
+            <Card v-else class="max-w-2xl">
+                <CardHeader>
+                    <CardTitle>Your pitch</CardTitle>
+                    <CardDescription>
+                        Create your first pitch to tell others about your
+                        project or what you're looking for in a co-founder.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Button as-child variant="default">
+                        <Link :href="PitchController.create.url()"
+                            >Create your first pitch</Link
+                        >
+                    </Button>
+                </CardContent>
+            </Card>
         </div>
     </AppLayout>
 </template>

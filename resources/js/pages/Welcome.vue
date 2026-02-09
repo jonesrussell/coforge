@@ -36,14 +36,20 @@ onMounted(() => {
         },
         { threshold: 0.08, rootMargin: '0px 0px -30px 0px' },
     );
-    document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+    document
+        .querySelectorAll('.scroll-reveal')
+        .forEach((el) => observer.observe(el));
 });
 </script>
 
 <template>
     <Head title="Coforge — Find Your Co-Founder">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="anonymous"
+        />
         <link
             href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
@@ -53,8 +59,12 @@ onMounted(() => {
     <div class="landing-page">
         <!-- ═══════════════════ NAVIGATION ═══════════════════ -->
         <header class="nav-bar">
-            <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-                <a href="/" class="nav-logo" aria-label="Coforge Home">COFORGE</a>
+            <nav
+                class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
+            >
+                <a href="/" class="nav-logo" aria-label="Coforge Home"
+                    >COFORGE</a
+                >
                 <div class="flex items-center gap-3">
                     <Link
                         v-if="$page.props.auth.user"
@@ -64,8 +74,14 @@ onMounted(() => {
                         Dashboard
                     </Link>
                     <template v-else>
-                        <Link :href="login()" class="nav-link-ghost"> Log in </Link>
-                        <Link v-if="canRegister" :href="register()" class="nav-link-outline">
+                        <Link :href="login()" class="nav-link-ghost">
+                            Log in
+                        </Link>
+                        <Link
+                            v-if="canRegister"
+                            :href="register()"
+                            class="nav-link-outline"
+                        >
                             Get Started
                         </Link>
                     </template>
@@ -99,7 +115,9 @@ onMounted(() => {
 
             <!-- Content -->
             <div class="hero-content">
-                <p class="eyebrow hero-reveal hero-reveal-1">Where builders meet</p>
+                <p class="eyebrow hero-reveal hero-reveal-1">
+                    Where builders meet
+                </p>
 
                 <h1 class="hero-headline hero-reveal hero-reveal-2">
                     Every <span class="text-amber">Jobs</span><br />
@@ -112,17 +130,23 @@ onMounted(() => {
                 </p>
 
                 <p class="hero-desc hero-reveal hero-reveal-4">
-                    Coforge matches developers with entrepreneurs&mdash;and gives<br
-                        class="hidden md:block"
-                    />
+                    Coforge matches developers with entrepreneurs&mdash;and
+                    gives<br class="hidden md:block" />
                     both sides the shared context to start building together.
                 </p>
 
                 <div class="hero-cta hero-reveal hero-reveal-5">
-                    <Link v-if="canRegister" :href="register()" class="btn-primary">
+                    <Link
+                        v-if="canRegister"
+                        :href="register()"
+                        class="btn-primary"
+                    >
                         Start Pitching
                     </Link>
-                    <button class="btn-ghost" @click="scrollTo('#how-it-works')">
+                    <button
+                        class="btn-ghost"
+                        @click="scrollTo('#how-it-works')"
+                    >
                         See How It Works
                         <svg
                             width="16"
@@ -144,7 +168,10 @@ onMounted(() => {
             </div>
 
             <!-- Scroll indicator -->
-            <div class="scroll-hint hero-reveal hero-reveal-6" aria-hidden="true">
+            <div
+                class="scroll-hint hero-reveal hero-reveal-6"
+                aria-hidden="true"
+            >
                 <div class="scroll-track">
                     <div class="scroll-dot"></div>
                 </div>
@@ -159,8 +186,9 @@ onMounted(() => {
                     Two halves.<br />One forge.
                 </h2>
                 <p class="section-desc scroll-reveal">
-                    Context-aware matching that goes deeper than keywords. Coforge understands what
-                    you're building, what you need, and who you should meet.
+                    Context-aware matching that goes deeper than keywords.
+                    Coforge understands what you're building, what you need, and
+                    who you should meet.
                 </p>
 
                 <!-- Two-card visual -->
@@ -169,12 +197,14 @@ onMounted(() => {
                     <div class="match-card card-visionary scroll-reveal">
                         <div class="match-badge badge-amber">Entrepreneur</div>
                         <p class="match-quote">
-                            &ldquo;I have the vision, the market insight, and the
-                            drive.&nbsp;I&nbsp;need a technical co&#8209;founder who can bring it
+                            &ldquo;I have the vision, the market insight, and
+                            the drive.&nbsp;I&nbsp;need a technical
+                            co&#8209;founder who can bring it
                             to&nbsp;life.&rdquo;
                         </p>
                         <div class="match-tags">
-                            <span>SaaS</span><span>FinTech</span><span>B2B</span>
+                            <span>SaaS</span><span>FinTech</span
+                            ><span>B2B</span>
                         </div>
                     </div>
 
@@ -182,9 +212,22 @@ onMounted(() => {
                     <div class="forge-symbol scroll-reveal" aria-hidden="true">
                         <svg viewBox="0 0 120 80" class="forge-svg">
                             <defs>
-                                <radialGradient id="forge-glow" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="#F5A623" stop-opacity="0.5" />
-                                    <stop offset="100%" stop-color="#818CF8" stop-opacity="0" />
+                                <radialGradient
+                                    id="forge-glow"
+                                    cx="50%"
+                                    cy="50%"
+                                    r="50%"
+                                >
+                                    <stop
+                                        offset="0%"
+                                        stop-color="#F5A623"
+                                        stop-opacity="0.5"
+                                    />
+                                    <stop
+                                        offset="100%"
+                                        stop-color="#818CF8"
+                                        stop-opacity="0"
+                                    />
                                 </radialGradient>
                             </defs>
                             <circle
@@ -205,7 +248,13 @@ onMounted(() => {
                                 stroke-width="1"
                                 opacity="0.5"
                             />
-                            <ellipse cx="60" cy="40" rx="14" ry="24" fill="url(#forge-glow)" />
+                            <ellipse
+                                cx="60"
+                                cy="40"
+                                rx="14"
+                                ry="24"
+                                fill="url(#forge-glow)"
+                            />
                         </svg>
                     </div>
 
@@ -213,9 +262,9 @@ onMounted(() => {
                     <div class="match-card card-builder scroll-reveal">
                         <div class="match-badge badge-indigo">Developer</div>
                         <p class="match-quote">
-                            &ldquo;I have the skills, the architecture instinct, and the
-                            craft.&nbsp;I&nbsp;need a project that's truly worth
-                            building.&rdquo;
+                            &ldquo;I have the skills, the architecture instinct,
+                            and the craft.&nbsp;I&nbsp;need a project that's
+                            truly worth building.&rdquo;
                         </p>
                         <div class="match-tags">
                             <span>Vue</span><span>Go</span><span>Systems</span>
@@ -235,7 +284,10 @@ onMounted(() => {
 
                 <div class="features-grid">
                     <!-- Feature 1 -->
-                    <div class="feature-card scroll-reveal" style="--accent: #f5a623">
+                    <div
+                        class="feature-card scroll-reveal"
+                        style="--accent: #f5a623"
+                    >
                         <div class="feature-icon">
                             <svg
                                 viewBox="0 0 32 32"
@@ -260,14 +312,18 @@ onMounted(() => {
                         </div>
                         <h3 class="feature-title">Pitch Your Project</h3>
                         <p class="feature-desc">
-                            Present your vision clearly&mdash;whether you're a founder seeking
-                            technical leadership or a developer looking for a visionary. Structured
-                            pitches, not cold DMs.
+                            Present your vision clearly&mdash;whether you're a
+                            founder seeking technical leadership or a developer
+                            looking for a visionary. Structured pitches, not
+                            cold DMs.
                         </p>
                     </div>
 
                     <!-- Feature 2 -->
-                    <div class="feature-card scroll-reveal" style="--accent: #818cf8">
+                    <div
+                        class="feature-card scroll-reveal"
+                        style="--accent: #818cf8"
+                    >
                         <div class="feature-icon">
                             <svg
                                 viewBox="0 0 32 32"
@@ -285,13 +341,17 @@ onMounted(() => {
                         </div>
                         <h3 class="feature-title">Discover Your Match</h3>
                         <p class="feature-desc">
-                            Context-aware matching that understands what you're building and who you
-                            should meet. Skills, temperament, and vision&mdash;all&nbsp;factored in.
+                            Context-aware matching that understands what you're
+                            building and who you should meet. Skills,
+                            temperament, and vision&mdash;all&nbsp;factored in.
                         </p>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="feature-card scroll-reveal" style="--accent: #34d399">
+                    <div
+                        class="feature-card scroll-reveal"
+                        style="--accent: #34d399"
+                    >
                         <div class="feature-icon">
                             <svg
                                 viewBox="0 0 32 32"
@@ -317,8 +377,9 @@ onMounted(() => {
                         </div>
                         <h3 class="feature-title">Stay Informed</h3>
                         <p class="feature-desc">
-                            A curated feed of articles and insights tuned to your domain, powered by
-                            North Cloud's content intelligence. Always relevant, always fresh.
+                            A curated feed of articles and insights tuned to
+                            your domain, powered by North Cloud's content
+                            intelligence. Always relevant, always fresh.
                         </p>
                     </div>
                 </div>
@@ -328,19 +389,25 @@ onMounted(() => {
         <!-- ═══════════════════ ARTICLE FEED PREVIEW ═══════════════════ -->
         <section class="feed-section">
             <div class="feed-inner">
-                <p class="section-eyebrow scroll-reveal">Powered by North Cloud</p>
+                <p class="section-eyebrow scroll-reveal">
+                    Powered by North Cloud
+                </p>
                 <h2 class="section-heading scroll-reveal">
                     Your feed,<br />forged for you.
                 </h2>
                 <p class="section-desc scroll-reveal">
-                    The platform continuously ingests high-quality, industry-aligned content&mdash;giving
-                    you a feed that feels alive, curated, and directly connected to what you're building.
+                    The platform continuously ingests high-quality,
+                    industry-aligned content&mdash;giving you a feed that feels
+                    alive, curated, and directly connected to what you're
+                    building.
                 </p>
 
                 <div class="feed-grid">
                     <article class="feed-card scroll-reveal">
                         <div class="feed-tag tag-fintech">FinTech</div>
-                        <h4 class="feed-title">Why Payment Infrastructure Is the New Moat</h4>
+                        <h4 class="feed-title">
+                            Why Payment Infrastructure Is the New Moat
+                        </h4>
                         <p class="feed-meta">
                             <span class="feed-source">The Generalist</span>
                             <span class="feed-dot">&middot;</span>
@@ -349,7 +416,9 @@ onMounted(() => {
                     </article>
                     <article class="feed-card scroll-reveal">
                         <div class="feed-tag tag-ai">AI / ML</div>
-                        <h4 class="feed-title">Retrieval-Augmented Generation in Production Systems</h4>
+                        <h4 class="feed-title">
+                            Retrieval-Augmented Generation in Production Systems
+                        </h4>
                         <p class="feed-meta">
                             <span class="feed-source">Pragmatic Engineer</span>
                             <span class="feed-dot">&middot;</span>
@@ -358,7 +427,9 @@ onMounted(() => {
                     </article>
                     <article class="feed-card scroll-reveal">
                         <div class="feed-tag tag-oss">Open Source</div>
-                        <h4 class="feed-title">The Business Model Canvas for Developer Tools</h4>
+                        <h4 class="feed-title">
+                            The Business Model Canvas for Developer Tools
+                        </h4>
                         <p class="feed-meta">
                             <span class="feed-source">OSS Capital</span>
                             <span class="feed-dot">&middot;</span>
@@ -367,7 +438,9 @@ onMounted(() => {
                     </article>
                     <article class="feed-card scroll-reveal">
                         <div class="feed-tag tag-startup">Startups</div>
-                        <h4 class="feed-title">Finding Technical Co-Founders: A Founder's Playbook</h4>
+                        <h4 class="feed-title">
+                            Finding Technical Co-Founders: A Founder's Playbook
+                        </h4>
                         <p class="feed-meta">
                             <span class="feed-source">First Round Review</span>
                             <span class="feed-dot">&middot;</span>
@@ -382,17 +455,21 @@ onMounted(() => {
         <section class="cta-section">
             <div class="cta-inner scroll-reveal">
                 <div class="cta-glow" aria-hidden="true"></div>
-                <h2 class="cta-heading">
-                    Ready to forge<br />your future?
-                </h2>
+                <h2 class="cta-heading">Ready to forge<br />your future?</h2>
                 <p class="cta-desc">
                     Join a community of builders who refuse to build alone.
                 </p>
                 <div class="cta-actions">
-                    <Link v-if="canRegister" :href="register()" class="btn-primary btn-lg">
+                    <Link
+                        v-if="canRegister"
+                        :href="register()"
+                        class="btn-primary btn-lg"
+                    >
                         Create Your Profile
                     </Link>
-                    <Link :href="login()" class="btn-ghost"> Already have an account? </Link>
+                    <Link :href="login()" class="btn-ghost">
+                        Already have an account?
+                    </Link>
                 </div>
             </div>
         </section>
@@ -401,7 +478,10 @@ onMounted(() => {
         <footer class="site-footer">
             <div class="footer-inner">
                 <span class="footer-logo">COFORGE</span>
-                <p class="footer-copy">&copy; {{ new Date().getFullYear() }} Coforge. All rights reserved.</p>
+                <p class="footer-copy">
+                    &copy; {{ new Date().getFullYear() }} Coforge. All rights
+                    reserved.
+                </p>
             </div>
         </footer>
     </div>
@@ -505,10 +585,22 @@ onMounted(() => {
 .hero-grid {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px
+    );
     background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 80%);
+    mask-image: radial-gradient(
+        ellipse 70% 60% at 50% 45%,
+        black 30%,
+        transparent 80%
+    );
+    -webkit-mask-image: radial-gradient(
+        ellipse 70% 60% at 50% 45%,
+        black 30%,
+        transparent 80%
+    );
 }
 
 .orb {
@@ -521,7 +613,11 @@ onMounted(() => {
 .orb-warm {
     width: min(600px, 80vw);
     height: min(600px, 80vw);
-    background: radial-gradient(circle, rgba(245, 166, 35, 0.13) 0%, transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(245, 166, 35, 0.13) 0%,
+        transparent 70%
+    );
     top: 8%;
     left: 15%;
     animation: orb-drift-warm 18s ease-in-out infinite;
@@ -529,7 +625,11 @@ onMounted(() => {
 .orb-cool {
     width: min(500px, 70vw);
     height: min(500px, 70vw);
-    background: radial-gradient(circle, rgba(129, 140, 248, 0.1) 0%, transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(129, 140, 248, 0.1) 0%,
+        transparent 70%
+    );
     top: 18%;
     right: 10%;
     animation: orb-drift-cool 22s ease-in-out infinite;
@@ -610,12 +710,24 @@ onMounted(() => {
     transform: translateY(24px);
     animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.hero-reveal-1 { animation-delay: 0.15s; }
-.hero-reveal-2 { animation-delay: 0.35s; }
-.hero-reveal-3 { animation-delay: 0.55s; }
-.hero-reveal-4 { animation-delay: 0.75s; }
-.hero-reveal-5 { animation-delay: 0.95s; }
-.hero-reveal-6 { animation-delay: 1.2s; }
+.hero-reveal-1 {
+    animation-delay: 0.15s;
+}
+.hero-reveal-2 {
+    animation-delay: 0.35s;
+}
+.hero-reveal-3 {
+    animation-delay: 0.55s;
+}
+.hero-reveal-4 {
+    animation-delay: 0.75s;
+}
+.hero-reveal-5 {
+    animation-delay: 0.95s;
+}
+.hero-reveal-6 {
+    animation-delay: 1.2s;
+}
 
 /* Scroll indicator */
 .scroll-hint {
@@ -1098,18 +1210,38 @@ onMounted(() => {
 }
 
 /* Stagger within groups */
-.match-cards .scroll-reveal:nth-child(1) { transition-delay: 0s; }
-.match-cards .scroll-reveal:nth-child(2) { transition-delay: 0.15s; }
-.match-cards .scroll-reveal:nth-child(3) { transition-delay: 0.3s; }
+.match-cards .scroll-reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+.match-cards .scroll-reveal:nth-child(2) {
+    transition-delay: 0.15s;
+}
+.match-cards .scroll-reveal:nth-child(3) {
+    transition-delay: 0.3s;
+}
 
-.features-grid .scroll-reveal:nth-child(1) { transition-delay: 0s; }
-.features-grid .scroll-reveal:nth-child(2) { transition-delay: 0.12s; }
-.features-grid .scroll-reveal:nth-child(3) { transition-delay: 0.24s; }
+.features-grid .scroll-reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+.features-grid .scroll-reveal:nth-child(2) {
+    transition-delay: 0.12s;
+}
+.features-grid .scroll-reveal:nth-child(3) {
+    transition-delay: 0.24s;
+}
 
-.feed-grid .scroll-reveal:nth-child(1) { transition-delay: 0s; }
-.feed-grid .scroll-reveal:nth-child(2) { transition-delay: 0.08s; }
-.feed-grid .scroll-reveal:nth-child(3) { transition-delay: 0.16s; }
-.feed-grid .scroll-reveal:nth-child(4) { transition-delay: 0.24s; }
+.feed-grid .scroll-reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+.feed-grid .scroll-reveal:nth-child(2) {
+    transition-delay: 0.08s;
+}
+.feed-grid .scroll-reveal:nth-child(3) {
+    transition-delay: 0.16s;
+}
+.feed-grid .scroll-reveal:nth-child(4) {
+    transition-delay: 0.24s;
+}
 
 /* ── Keyframes ─────────────────────────────────────── */
 @keyframes reveal-up {

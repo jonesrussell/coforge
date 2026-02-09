@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { useNorthcloudNavigation } from '@jonesrussell/northcloud-laravel';
+import { BookOpen, Folder, LayoutGrid, Megaphone } from 'lucide-vue-next';
 import { computed } from 'vue';
+import PitchController from '@/actions/App/Http/Controllers/PitchController';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
@@ -14,7 +16,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { useNorthcloudNavigation } from '@jonesrussell/northcloud-laravel';
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import AppLogo from './AppLogo.vue';
@@ -26,6 +27,11 @@ const mainNavItems = computed<NavItem[]>(() => [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Pitches',
+        href: PitchController.index.url(),
+        icon: Megaphone,
     },
     ...northcloudItems.value,
 ]);
