@@ -45,7 +45,7 @@ onMounted(() => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
-            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
         />
     </Head>
@@ -421,7 +421,7 @@ onMounted(() => {
     --text-secondary: #a0a3ab;
     --muted: #6b6e76;
     --border: #1a2030;
-    --font-display: 'Syne', 'Instrument Sans', sans-serif;
+    --font-display: 'Plus Jakarta Sans', 'Instrument Sans', sans-serif;
 
     background: var(--bg);
     color: var(--text);
@@ -575,7 +575,7 @@ onMounted(() => {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(2.8rem, 8vw, 6rem);
-    line-height: 0.95;
+    line-height: 1.1;
     letter-spacing: -0.025em;
     margin-bottom: 0.6rem;
 }
@@ -708,7 +708,7 @@ onMounted(() => {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(2rem, 5vw, 3.4rem);
-    line-height: 1;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     text-align: center;
     margin-bottom: 1.25rem;
@@ -1034,7 +1034,7 @@ onMounted(() => {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
     position: relative;
