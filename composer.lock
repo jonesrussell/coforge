@@ -1233,7 +1233,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github-northcloud:jonesrussell/northcloud-laravel.git",
-                "reference": "9467c0ace67d1dfcee561fe25db0cf663d2f5b1a"
+                "reference": "49688d6570f074fcad398c285156c9cd1930c5ec"
             },
             "require": {
                 "ext-json": "*",
@@ -1275,7 +1275,7 @@
                 "MIT"
             ],
             "description": "Shared article ingestion pipeline for North Cloud-connected Laravel sites",
-            "time": "2026-02-09T01:48:05+00:00"
+            "time": "2026-02-09T02:34:08+00:00"
         },
         {
             "name": "laravel/fortify",
