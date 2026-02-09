@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, FileText, Folder, LayoutGrid } from 'lucide-vue-next';
+import { Link, usePage } from '@inertiajs/vue3';
+import { BookOpen, FileText, Folder, LayoutGrid, type LucideIcon } from 'lucide-vue-next';
+import { computed } from 'vue';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
@@ -14,22 +15,38 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { index as articlesIndex } from '@/routes/dashboard/articles';
 import { type NavItem } from '@/types';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Articles',
-        href: articlesIndex(),
-        icon: FileText,
-    },
-];
+const iconMap: Record<string, LucideIcon> = {
+    FileText,
+    Folder,
+    BookOpen,
+    LayoutGrid,
+};
+
+const page = usePage();
+
+const mainNavItems = computed<NavItem[]>(() => {
+    const items: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+    ];
+
+    const northcloudNav = (page.props.northcloud as { navigation?: Array<{ title: string; href: string; icon: string }> })?.navigation ?? [];
+    for (const item of northcloudNav) {
+        items.push({
+            title: item.title,
+            href: item.href,
+            icon: iconMap[item.icon],
+        });
+    }
+
+    return items;
+});
 
 const footerNavItems: NavItem[] = [
     {
