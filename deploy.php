@@ -36,6 +36,10 @@ host('coforge.xyz')
 after('deploy:failed', 'deploy:unlock');
 before('deploy:symlink', 'artisan:migrate');
 
+// Disable view caching — Inertia renders views client-side and artisan:view:cache
+// tries to connect to the SSR server which isn't running during deploy.
+task('artisan:view:cache', function (): void {});
+
 task('deploy:install_services', function (): void {
     $serviceDir = '~/.config/systemd/user';
     run("mkdir -p $serviceDir");
@@ -46,12 +50,12 @@ task('deploy:install_services', function (): void {
 before('deploy:symlink', 'deploy:install_services');
 
 task('deploy:restart_services', function (): void {
-    run('cd {{release_path}} && {{bin/php}} artisan horizon:terminate', ['allow_failure' => true]);
-    run('cd {{release_path}} && {{bin/php}} artisan inertia:stop-ssr', ['allow_failure' => true]);
-    run('systemctl --user restart coforge-schedule-work.service coforge-horizon.service coforge-inertia-ssr.service coforge-articles-subscribe.service', ['allow_failure' => true]);
+    run('cd {{release_path}} && {{bin/php}} artisan horizon:terminate || true');
+    run('cd {{release_path}} && {{bin/php}} artisan inertia:stop-ssr || true');
+    run('systemctl --user restart coforge-schedule-work.service coforge-horizon.service coforge-inertia-ssr.service coforge-articles-subscribe.service || true');
 });
 after('deploy:symlink', 'deploy:restart_services');
 task('deploy:reload_php_fpm', function (): void {
-    run('sudo systemctl restart php8.4-fpm', ['allow_failure' => true]);
+    run('sudo systemctl restart php8.4-fpm || true');
 });
 after('deploy:restart_services', 'deploy:reload_php_fpm');
