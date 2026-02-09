@@ -102,13 +102,13 @@ onMounted(() => {
                 <p class="eyebrow hero-reveal hero-reveal-1">Where builders meet</p>
 
                 <h1 class="hero-headline hero-reveal hero-reveal-2">
-                    Every <span class="text-amber">Steve</span><br />
+                    Every <span class="text-amber">Jobs</span><br />
                     needs a <span class="text-indigo">Woz</span>.
                 </h1>
 
                 <p class="hero-sub hero-reveal hero-reveal-3">
                     And every <span class="text-indigo">Woz</span> needs a
-                    <span class="text-amber">Steve</span>.
+                    <span class="text-amber">Jobs</span>.
                 </p>
 
                 <p class="hero-desc hero-reveal hero-reveal-4">
