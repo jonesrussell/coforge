@@ -178,6 +178,15 @@ return [
             'backoff_cap' => env('REDIS_BACKOFF_CAP', 1000),
         ],
 
+        'northcloud' => [
+            'host' => env('NORTHCLOUD_REDIS_HOST', env('REDIS_HOST', '127.0.0.1')),
+            'username' => env('NORTHCLOUD_REDIS_USERNAME', env('REDIS_USERNAME')),
+            'password' => env('NORTHCLOUD_REDIS_PASSWORD', env('REDIS_PASSWORD')),
+            'port' => env('NORTHCLOUD_REDIS_PORT', env('REDIS_PORT', '6379')),
+            'database' => env('NORTHCLOUD_REDIS_DB', '2'),
+            'prefix' => '',
+        ],
+
     ],
 
 ];
