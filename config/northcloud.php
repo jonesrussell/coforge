@@ -9,7 +9,11 @@ return [
         'connection' => env('NORTHCLOUD_REDIS_CONNECTION', 'northcloud'),
         'channels' => array_filter(array_map(
             'trim',
-            explode(',', env('NORTHCLOUD_CHANNELS', 'articles:default'))
+            explode(',', env('NORTHCLOUD_CHANNELS', implode(',', [
+                // Layer 8: Coforge classification (publisher does not emit articles:default)
+                'coforge:core',
+                'coforge:peripheral',
+            ])))
         )),
     ],
 
