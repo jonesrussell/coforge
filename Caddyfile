@@ -73,7 +73,7 @@ coforge.xyz {
   }
 
   log {
-    output file /home/deployer/coforge/log/access.log {
+    output file /var/log/caddy/coforge.xyz.access.log {
       mode 0644
     }
   }
