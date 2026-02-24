@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(ddev exec *)",
+      "Bash(npm run lint)",
+      "Bash(npm run format)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "filepath=\"$CLAUDE_FILE_PATH\"; if [[ \"$filepath\" == *.env || \"$filepath\" == */.env ]]; then echo 'BLOCKED: Do not edit .env files directly' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "filepath=\"$CLAUDE_FILE_PATH\"; if [[ \"$filepath\" == *.php ]]; then ./vendor/bin/pint \"$filepath\" 2>/dev/null; fi"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "filepath=\"$CLAUDE_FILE_PATH\"; if [[ \"$filepath\" == *.vue || \"$filepath\" == *.ts ]]; then npx prettier --write \"$filepath\" 2>/dev/null && npx eslint --fix \"$filepath\" 2>/dev/null; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
