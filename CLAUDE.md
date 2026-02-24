@@ -62,9 +62,11 @@ vendor/bin/dep deploy  # Deploy to coforge.xyz via Deployer
 ### Backend (PHP)
 
 - **Auth**: Laravel Fortify handles all authentication (login, register, password reset, email verification, 2FA). Views are rendered as Inertia pages via `FortifyServiceProvider`. Custom actions live in `app/Actions/Fortify/`.
-- **Controllers**: Currently only `Settings/` controllers (Profile, Password, TwoFactorAuthentication). Routes use Inertia inline rendering for simple pages.
+- **Controllers**: `DashboardController`, `PitchController`, `PitchInterestController`, `DiscoverController` at root level; `Settings/` controllers handle Profile, Password, TwoFactorAuthentication. Routes use Inertia inline rendering for simple pages.
+- **Models**: `Pitch` (has skills via `pitch_skill` pivot, has interests), `PitchInterest` (belongs to user + pitch), `Skill` (many-to-many with pitches), `User` (has one pitch — v1 limit, has many pitch interests).
+- **Policies**: `PitchPolicy` and `PitchInterestPolicy` gate all pitch operations. `PitchPolicy` enforces one-pitch-per-user in `create()`.
 - **Concerns**: Shared validation rule traits (`PasswordValidationRules`, `ProfileValidationRules`) used across requests and actions.
-- **Form Requests**: Located in `app/Http/Requests/Settings/` — validation is extracted into request classes, not inline in controllers.
+- **Form Requests**: Located in `app/Http/Requests/` — `StorePitchRequest`, `UpdatePitchRequest`, `StorePitchInterestRequest` at root level; settings requests (`PasswordUpdateRequest`, `ProfileUpdateRequest`, etc.) in `Settings/` subdirectory.
 - **Middleware**: `HandleInertiaRequests` shares `auth.user`, `name`, and `sidebarOpen` props globally. `HandleAppearance` manages theme.
 - **NorthCloud**: `jonesrussell/northcloud-laravel` provides article ingestion via Redis pub/sub. Models: `Article`, `NewsSource`, `Tag`. Admin at `/dashboard/articles` (requires `is_admin`). Config in `config/northcloud.php`. Commands: `articles:subscribe`, `articles:status`, `articles:stats`.
 - **Queue**: Redis-backed via Horizon. Production uses up to 10 worker processes.
@@ -73,7 +75,7 @@ vendor/bin/dep deploy  # Deploy to coforge.xyz via Deployer
 ### Frontend (TypeScript + Vue 3)
 
 - **Inertia.js**: Pages in `resources/js/pages/` are resolved automatically. Page components receive props from Laravel controllers.
-- **Layouts**: Two-tier layout system — `AppLayout.vue` and `AuthLayout.vue` are wrappers that delegate to concrete implementations in `layouts/app/` (sidebar, header variants) and `layouts/auth/` (simple, card, split variants).
+- **Layouts**: Three-tier layout system — `AppLayout.vue` and `AuthLayout.vue` are wrappers that delegate to concrete implementations in `layouts/app/` (sidebar, header variants) and `layouts/auth/` (simple, card, split variants). Settings pages use a dedicated `layouts/settings/Layout.vue`.
 - **UI Components**: shadcn-vue (new-york-v4 style) in `resources/js/components/ui/`. These are auto-generated — excluded from ESLint.
 - **Wayfinder**: `@laravel/vite-plugin-wayfinder` generates typed route helpers in `resources/js/wayfinder/` from Laravel routes. Use these instead of hardcoded URLs.
 - **Types**: Shared TypeScript types in `resources/js/types/` — `Auth`, `User`, `AppPageProps`, `BreadcrumbItem`, etc.
@@ -87,6 +89,12 @@ vendor/bin/dep deploy  # Deploy to coforge.xyz via Deployer
 - **Tests**: Pest PHP with `RefreshDatabase` trait auto-applied to Feature tests via `tests/Pest.php`.
 - **Dates**: `CarbonImmutable` is the default Date class (configured in `AppServiceProvider`).
 - **Passwords**: Production enforces min 12 chars, mixed case, letters, numbers, symbols, uncompromised check.
+
+### Gotchas
+
+- **One pitch per user (v1)**: Each user can only have one `Pitch`. Enforced in `PitchPolicy@create` and checked in `PitchController@store`. `User` has a `hasOne` relationship, not `hasMany`.
+- **Slug-based public pitch routes**: Public pitch URLs use `{pitch:slug}` route-model binding (`pitches/{pitch:slug}`), not ID-based. Slugs are auto-generated from title on save via `Pitch::boot()`.
+- **DDEV for database commands**: `php artisan test`, `php artisan migrate`, etc. need `ddev exec` prefix when running locally since the database is inside the DDEV container.
 
 ### Deployment
 
